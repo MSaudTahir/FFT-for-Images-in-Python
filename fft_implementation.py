@@ -2,6 +2,8 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
+
+#discrete fourier transform 1d implementation
 def dft(img, inv=False):
     img = np.array(img)
     if (len(img.shape) == 1):
@@ -21,6 +23,7 @@ def dft(img, inv=False):
 
     return X/m*n if inv else X
 
+#fast fourier transform 1d implementation
 def fft(x):
     x = np.asarray(x, dtype=np.complex_)
     N = x.shape[0]
@@ -37,6 +40,7 @@ def fft(x):
 
 img = cv2.imread('img.jpg', 0)
 
+#fast fourier transform 2d implementation
 def fft2(img):
     fourier = [[] for _ in range(img.shape[0])]
     for i in range(img.shape[0]):
@@ -51,5 +55,5 @@ def fft2(img):
 fourier_domain = fft2(img)
 plt.imshow(np.real(np.log(np.fft.fftshift(fourier_domain))), cmap='gray')
 
-#comparing with the fucntion from numpy
+#comparing with the function from numpy
 plt.imshow(np.real(np.log((np.fft.fftshift(np.fft.fft2(img))))), cmap='gray')
